@@ -4,7 +4,7 @@ import { type MutableRefObject } from "react";
 
 interface BookPageProps {
   frontContent: React.ReactNode;
-  backContent: React.ReactNode;
+  backContent?: React.ReactNode;
   zIndex: number;
   pageIndex: number;
   pageRefs: MutableRefObject<(HTMLDivElement | null)[]>;
@@ -22,13 +22,12 @@ export function BookPage({
       ref={(el) => {
         pageRefs.current[pageIndex] = el;
       }}
-      className="absolute inset-0 preserve-3d bg-blue-600"
+      className="absolute inset-0 preserve-3d"
       style={{
         transformOrigin: "left center",
         zIndex,
       }}
     >
-      {/* Front of page */}
       <div
         className="absolute inset-0 backface-hidden paper-texture rounded-r-sm overflow-hidden"
         style={{
@@ -36,25 +35,25 @@ export function BookPage({
         }}
       >
         <div className="absolute inset-0 p-5 md:p-8 flex flex-col">
-          {/* Page edge lines */}
-          <div
+          {/* Page edge lines  */}
+          {/* <div
             className="absolute left-0 top-0 bottom-0 w-px"
             style={{ backgroundColor: "rgba(139, 94, 60, 0.1)" }}
-          />
-          <div
+          /> */}
+          {/* <div
             className="absolute left-3 md:left-6 top-0 bottom-0 w-px"
             style={{ backgroundColor: "rgba(139, 94, 60, 0.08)" }}
-          />
+          /> */}
           {frontContent}
         </div>
-        {/* Page number */}
-        <div className="absolute bottom-3 right-4 text-[10px] text-muted-foreground/50 font-sans">
+
+        {/* <div className="absolute bottom-3 right-4 text-[10px] text-muted-foreground/50 font-sans">
           {pageIndex * 2 + 1}
-        </div>
+        </div> */}
       </div>
 
       {/* Back of page */}
-      <div
+      {/* <div
         className="absolute inset-0 backface-hidden paper-texture-aged rounded-l-sm overflow-hidden"
         style={{
           transform: "rotateY(180deg)",
@@ -62,7 +61,7 @@ export function BookPage({
         }}
       >
         <div className="absolute inset-0 p-5 md:p-8 flex flex-col">
-          {/* Page edge lines */}
+          {/* Page edge lines 
           <div
             className="absolute right-0 top-0 bottom-0 w-px"
             style={{ backgroundColor: "rgba(139, 94, 60, 0.1)" }}
@@ -73,11 +72,10 @@ export function BookPage({
           />
           {backContent}
         </div>
-        {/* Page number */}
         <div className="absolute bottom-3 left-4 text-[10px] text-muted-foreground/50 font-sans">
           {pageIndex * 2 + 2}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
