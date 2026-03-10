@@ -4,6 +4,10 @@ import gsap from "gsap";
 import { Book } from "./book";
 import { ScrollIndicator } from "./scroll-indicator";
 import { useEffect, useRef } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { OpenBook } from "./open-book";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const BOOKS = [
   {
@@ -51,9 +55,12 @@ export function BookshelfScene() {
   const booksRowRef = useRef<HTMLDivElement>(null);
   const memoryBookRef = useRef<HTMLDivElement>(null);
   const othersBooksRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const coverRef = useRef<HTMLDivElement>(null);
+  const pageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const openBookWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.log("outros antes: ", othersBooksRefs.current);
+    console.log("outros antes: ", memoryBookRef.current);
 
     const ctx = gsap.context(() => {
       gsap.from(titleRef.current, {
@@ -81,9 +88,10 @@ export function BookshelfScene() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "bottom bottom",
+          end: "+=100%",
           scrub: 1.2,
           invalidateOnRefresh: true,
+          markers: true,
         },
       });
 
@@ -91,18 +99,55 @@ export function BookshelfScene() {
         Boolean,
       ) as HTMLDivElement[];
 
+      tl.to(othersBooks, {
+        opacity: 0,
+        duration: 0.08,
+        stagger: 0.005,
+        ease: "power1.out",
+      });
+
       tl.to(
-        othersBooks,
+        memoryBookRef.current,
+        {
+          scale: 4,
+          y: -80,
+          rotation: -15,
+          duration: 0.2,
+          ease: "power2.inOut",
+        },
+        0.1,
+      );
+
+      tl.to(
+        memoryBookRef.current,
         {
           opacity: 0,
           duration: 0.08,
-          stagger: 0.005,
           ease: "power1.out",
         },
-        0.06,
+        0.16,
       );
 
-      console.log("outros depois: ", othersBooksRefs.current);
+      tl.fromTo(
+        openBookWrapperRef.current,
+        { opacity: 0 },
+        { opacity: 1, ease: "power2.out", duration: 0.1 },
+        0.22,
+      );
+
+      tl.to(
+        coverRef.current,
+        {
+          rotateY: -160,
+          duration: 0.3,
+          ease: "power1.out",
+        },
+        0.3,
+      );
+
+      // tl.from(pageRefs, {
+      //   opacity: 0,
+      // });
     }, containerRef);
 
     return () => ctx.revert();
@@ -152,10 +197,13 @@ export function BookshelfScene() {
 
         {ScrollIndicator()}
 
-        <div className="absolute inset-0 flex flex-col justify-center">
+        <div
+          ref={openBookWrapperRef}
+          className="absolute inset-0 flex flex-col justify-center"
+        >
           {/* <div></div> */}
 
-          {/* <OpenBook coverRef={coverRef} pageRefs={pageRefs} /> */}
+          <OpenBook coverRefs={coverRef} pageRefs={pageRefs} />
 
           {/* {ProgressIndicator()} */}
         </div>
