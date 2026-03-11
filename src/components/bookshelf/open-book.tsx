@@ -151,48 +151,52 @@ export function OpenBook({ coverRefs, pageRefs }: OpenBookProps) {
         ))}
 
         <div
-          className="absolute inset-y-0 w-full origin-left"
-          // style={{
-          //   transformOrigin: "left center",
-          // }}
+          className="absolute inset-y-0 w-full bg-pink-700"
+          style={{
+            transformOrigin: "left center",
+            transformStyle: "preserve-3d",
+          }}
         >
-          <div
-            ref={coverRefs}
-            className="absolute inset-0 backface-hidden"
-            style={{
-              background:
-                "linear-gradient(135deg, #8b4a30 0%, #6b3a2a 50%, #5a2e20 100%)",
-            }}
-          >
-            <div className="leather-texture absolute inset-0 rounded-l-sm" />
-            <div className="absolute inset-0 items-center justify-center flex flex-col gap-1">
-              <div className="w-1/4 h-px bg-[#c9a84c]" />
-              <h1
-                className="font-serif text-[#CFB53B]"
-                style={{ fontFamily: "Georgia" }}
-              >
-                Livro Legal
-              </h1>
-              <div className="w-1/4 h-px bg-[#c9a84c]" />
-              <svg
-                className="w-20 h-12 text-[#CFB53B]/40 mt-1"
-                viewBox="0 0 100 30"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1"
-              >
-                <path d="M10 15 Q 25 5, 50 15 T 90 15" />
-                <path d="M10 15 Q 25 25, 50 15 T 90 15" />
-                <circle cx="50" cy="15" r="2" fill="currentColor" />
-              </svg>
-            </div>
-            {/* <div
-              className="absolute left-0 top-0 bottom-0 w-2 sm:w-3 rounded-l-sm"
+          <div ref={coverRefs} className="absolute inset-0">
+            <div
+              className="absolute inset-0 backface-hidden"
               style={{
                 background:
-                  "linear-gradient(90deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1), transparent)",
+                  "linear-gradient(135deg, #8b4a30 0%, #6b3a2a 50%, #5a2e20 100%)",
+                transformStyle: "preserve-3d",
+                // transformOrigin: "left center",
               }}
-            /> */}
+            >
+              <div className="leather-texture absolute inset-0 rounded-l-sm" />
+              <div className="absolute inset-0 items-center justify-center flex flex-col gap-1">
+                <div className="w-1/4 h-px bg-[#c9a84c]" />
+                <h1
+                  className="font-serif text-[#CFB53B]"
+                  style={{ fontFamily: "Georgia" }}
+                >
+                  Livro Legal
+                </h1>
+                <div className="w-1/4 h-px bg-[#c9a84c]" />
+                <svg
+                  className="w-20 h-12 text-[#CFB53B]/40 mt-1"
+                  viewBox="0 0 100 30"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                >
+                  <path d="M10 15 Q 25 5, 50 15 T 90 15" />
+                  <path d="M10 15 Q 25 25, 50 15 T 90 15" />
+                  <circle cx="50" cy="15" r="2" fill="currentColor" />
+                </svg>
+              </div>
+              {/* <div
+                className="absolute left-0 top-0 bottom-0 w-2 sm:w-3 rounded-l-sm"
+                style={{
+                  background:
+                    "linear-gradient(90deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1), transparent)",
+                }}
+              /> */}
+            </div>
           </div>
         </div>
       </div>

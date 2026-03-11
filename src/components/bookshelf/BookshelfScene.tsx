@@ -139,7 +139,7 @@ export function BookshelfScene() {
         coverRef.current,
         {
           rotateY: -160,
-          duration: 0.3,
+          duration: 0.5,
           ease: "power1.out",
         },
         0.3,
