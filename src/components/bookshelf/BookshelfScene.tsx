@@ -6,6 +6,7 @@ import { ScrollIndicator } from "./scroll-indicator";
 import { useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { OpenBook } from "./open-book";
+import { PAGE_CONTENT } from "./use-book-page";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -60,8 +61,6 @@ export function BookshelfScene() {
   const openBookWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.log("outros antes: ", memoryBookRef.current);
-
     const ctx = gsap.context(() => {
       gsap.from(titleRef.current, {
         opacity: 0,
@@ -138,12 +137,27 @@ export function BookshelfScene() {
       tl.to(
         coverRef.current,
         {
-          rotateY: -160,
+          rotateY: -180,
           duration: 0.5,
           ease: "power1.out",
         },
         0.3,
       );
+
+      const pageFlipRange = 0.85 / PAGE_CONTENT.length
+      for (let i = 0; i < PAGE_CONTENT.length; i++) {
+        const page = pageRefs.current[i];
+        if (!page) continue
+        const start = 0.33 + i * pageFlipRange;
+
+        tl.to(page, {
+          rotateY: -160,
+          duration: pageFlipRange,
+          ease: "power1.inOut",
+        }, start)
+
+      }
+
 
       // tl.from(pageRefs, {
       //   opacity: 0,
