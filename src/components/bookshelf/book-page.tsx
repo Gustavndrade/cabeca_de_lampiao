@@ -12,7 +12,6 @@ interface BookPageProps {
 
 export function BookPage({
   frontContent,
-  backContent,
   zIndex,
   pageIndex,
   pageRefs,
@@ -22,7 +21,7 @@ export function BookPage({
       ref={(el) => {
         pageRefs.current[pageIndex] = el;
       }}
-      className="absolute inset-0 preserve-3d bg-blue-700"
+      className="absolute inset-0 preserve-3d bg-olive-100"
       style={{
         transformOrigin: "left center",
         zIndex,

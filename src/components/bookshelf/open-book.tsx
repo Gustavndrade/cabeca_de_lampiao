@@ -2,16 +2,13 @@ import { RefObject } from "react";
 import { BookPage } from "./book-page";
 import { DATA_CONTENT, PAGE_CONTENT } from "./use-book-page";
 
-
-// B7A037
-
 interface OpenBookProps {
   coverRefs: RefObject<HTMLDivElement | null>;
   pageRefs: RefObject<(HTMLDivElement | null)[]>;
 }
 
 export function OpenBook({ coverRefs, pageRefs }: OpenBookProps) {
-  const NUM_PAGES = PAGE_CONTENT.length;
+  const NUM_PAGES = DATA_CONTENT.length;
 
   return (
     <div
