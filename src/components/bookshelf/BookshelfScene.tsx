@@ -105,9 +105,9 @@ export function BookshelfScene() {
 
       tl.to(
         disappearRef.current, {
-         opacity: 0, 
-         ease: "power2.out", 
-         duration: 0.3 
+        opacity: 0,
+        ease: "power2.out",
+        duration: 0.3
       });
 
       tl.to(
@@ -149,7 +149,13 @@ export function BookshelfScene() {
         4.2,
       );
 
-      const pageFlipRange = 16 / DATA_CONTENT.length
+
+      const PAGE_FLIP_DURATION = 3.5;
+      const PAGE_FLIP_OVERLAP = 0.8;
+
+      const pageFlipRange = PAGE_FLIP_DURATION - PAGE_FLIP_OVERLAP;
+
+
       for (let i = 0; i < DATA_CONTENT.length; i++) {
         const page = pageRefs.current[i];
         if (!page) continue
@@ -157,7 +163,7 @@ export function BookshelfScene() {
 
         tl.to(page, {
           rotateY: -160,
-          duration: pageFlipRange,
+          duration: PAGE_FLIP_DURATION,
           ease: "power1.inOut",
         }, start)
 
@@ -209,7 +215,7 @@ export function BookshelfScene() {
         </div>
         <div className="bg-[#75502B] h-8 w-5/6 rounded-b-sm shadow-[0_4px_12px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.3)]" />
 
-        <ScrollIndicator scrollRef={disappearRef}/>
+        <ScrollIndicator scrollRef={disappearRef} />
 
         <div
           ref={openBookWrapperRef}
